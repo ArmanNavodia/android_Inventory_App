@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Inventory</string>
+    <string name="action_delete_all_items">Delete All items</string>
+
+    <string name="empty_view_subtitle_text">Add item to the list</string>
+    <string name="empty_view_title_text">There is nothing in the inventory</string>
+     <!--strings for editActivity-->
+    <string name="edit_item">Edit Item</string>
+    <string name="new_item">New Item</string>
+    <string name="item_name">Item Name</string>
+    <string name="price">Price</string>
+    <string name="quantity">Quantity</string>
+    <string name="Order_button">Order</string>
+    
+    <string name="hint_Item_Name">Item</string>
+    <string name="hint_price">0</string>
+    <string name="delete_item">delete item</string>
+
+</resources>
