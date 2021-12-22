@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -215,19 +216,15 @@ public class InventoryProvider extends ContentProvider {
      * for that specific row in the database.
      */
     private Uri insertItem(@NonNull Uri uri, @Nullable ContentValues values) {
-        //get the name value and check if it is not null
-        String name = values.getAsString(InventoryEntry.COLUMN_ITEM_NAME);
-        if (name == null)
-            throw new IllegalArgumentException("Name cannot be null");
-
-        //get the price value and check if it is not negative
-        int price = values.getAsInteger(InventoryEntry.COLUMN_PRICE);
-        if (price < 0)
-            throw new IllegalArgumentException("Price cannot be negative");
 
         //get writable database
         SQLiteDatabase db = mInventoryHelper.getWritableDatabase();
+        //get the price value and check if it is not negative
+        int price = values.getAsInteger(InventoryEntry.COLUMN_PRICE);
+        if (price < 0) {
+            Toast.makeText(getContext(), "Price cannot be negative", Toast.LENGTH_SHORT);
 
+        }
         //insert the item in the database
         long id = db.insert(InventoryEntry.TABLE_NAME, null, values);
 

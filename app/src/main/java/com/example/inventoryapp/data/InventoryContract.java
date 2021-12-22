@@ -9,7 +9,7 @@ import android.provider.BaseColumns;
 /**
  * API Contract for the Inventory app.
  */
-public class InventoryContract {
+public final class InventoryContract {
 
     public static final String CONTENT_AUTHORITY = "com.example.inventoryapp";
 

@@ -164,9 +164,6 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         String price = mPriceEditText.getText().toString().trim();
         String quantity = mQuantityTextView.getText().toString().trim();
 
-        //check if item name and price is not empty
-        //if empty return as we cannot add null values
-        if (mUrl == null && TextUtils.isEmpty(name) && TextUtils.isEmpty(price)) return;
 
         //create new content values object and put the values
         ContentValues values = new ContentValues();
@@ -230,9 +227,24 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
-                //insert the Item
+                //check that item name and price field are not empty before saving
+                //if empty display the toast
+
+                String name = mItemNameEditText.getText().toString().trim();
+                String price = mPriceEditText.getText().toString().trim();
+                if ( TextUtils.isEmpty(name) ){
+                    Toast.makeText(this,"Item Name cannot be empty",Toast.LENGTH_SHORT).show();
+                }
+                else if(TextUtils.isEmpty(price)){
+                    Toast.makeText(this,"Price cannot be empty",Toast.LENGTH_SHORT).show();
+                }else if(Integer.parseInt(price)<0){
+                    Toast.makeText(this,"Price cannot be negative",Toast.LENGTH_SHORT).show();
+                }
+                else {
                 insertItem();
-                finish();
+                    finish();
+                }
+
                 return true;
 
             // Respond to a click on the "Delete selected item" menu option
