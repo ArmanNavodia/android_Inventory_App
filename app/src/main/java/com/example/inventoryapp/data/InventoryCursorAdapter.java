@@ -1,17 +1,20 @@
 package com.example.inventoryapp.data;
 
+import static com.example.inventoryapp.EditActivity.fromByteArrayToBitmap;
 import static com.example.inventoryapp.data.InventoryContract.*;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.inventoryapp.R;
@@ -35,12 +38,19 @@ public class InventoryCursorAdapter extends CursorAdapter {
         TextView priceTextView=view.findViewById(R.id.price_text_view);
         TextView stockTextView=view.findViewById(R.id.stock_text_view);
         MaterialButton button=view.findViewById(R.id.button_sell);
+        ImageView imageView=view.findViewById(R.id.image_view);
 
     //get the data from the cursor
     String name=cursor.getString(cursor.getColumnIndexOrThrow(InventoryEntry.COLUMN_ITEM_NAME));
     String price=cursor.getString(cursor.getColumnIndexOrThrow(InventoryEntry.COLUMN_PRICE));
     Integer stock=cursor.getInt(cursor.getColumnIndexOrThrow(InventoryEntry.COLUMN_QUANTITY));
-
+        int colImage = cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_IMAGE);
+        if (cursor.getBlob(colImage) != null) {
+         Bitmap bitmap = fromByteArrayToBitmap(cursor.getBlob(colImage));
+            if (bitmap != null) {
+                imageView.setImageBitmap(bitmap);
+            }
+        }
     //display the data in appropriate format
     itemNameTextView.setText(name);
     priceTextView.setText("Price: "+price+" $");

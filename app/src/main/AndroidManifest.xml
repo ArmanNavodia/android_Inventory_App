@@ -3,6 +3,8 @@
     package="com.example.inventoryapp">
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -28,6 +30,7 @@
             <intent-filter>
             <action android:name="android.intent.action.SENDTO" />
             <data android:scheme="mailto" />
+                <data android:mimeType="image/*"/>
             <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             </activity>
@@ -37,6 +40,4 @@
             android:name=".data.InventoryProvider"
             android:exported="false"/>
     </application>
-    
-
 </manifest>
